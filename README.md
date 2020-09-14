@@ -9,3 +9,4 @@ Navigate menu by typing in numbers from 1-8 and providing necessary details.
 Ongoing development. Additonal features to add:
   1) add expansions dimension to game dimension
   2) prepare better navigation menu
+  3) add functionality of adding, modyfing game set and player set

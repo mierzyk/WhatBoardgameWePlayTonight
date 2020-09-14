@@ -26,8 +26,7 @@ public class Application {
         String tempGameMaxPlayer;
         String tempGameMinutesPerPlayer;
         String tempPlayerName;
-        int minutesForGame;
-
+        String minutesForGame;
 
         Set<String> tempArrayGame;
 
@@ -50,10 +49,10 @@ public class Application {
                     System.out.println(gameService.getAllGameData());
                     break;
                 case "2":
-                    System.out.println(gameService.getGames());
+                    System.out.println(gameService.getAllGame());
                     break;
                 case "3":
-                    System.out.println(playerService.getPlayer());
+                    System.out.println(playerService.getAllPlayer());
                     break;
                 case "4":
                     System.out.println("provide new game name");
@@ -86,29 +85,31 @@ public class Application {
                     tempPlayerName = scr.next();
                     if (tempPlayerName.isBlank()) {
                         System.out.println("Name cannot be empty");
+                        break;
                     }
                     if (playerService.playerUniqunessCheck(tempPlayerName)) {
                         System.out.println("That player already exists. Update his known games list or add other player");
                         break;
                     }
                     ;
-                    System.out.println("Provide comma-separated game list of a player without spacebars");
-                    tempGameName = scr.next();
+                    System.out.println("Provide comma-separated game list of a player");
+                    tempGameName = scr.next().replaceAll("\\s+","");
                     tempArrayGame = new HashSet<String>(Arrays.asList(tempGameName.split(",")));
-                    System.out.println(tempArrayGame);
-                    /*if(!gameServices.checkGameExistance(tempArrayGame).equals(""))
+                    if(gameService.checkGameExistance(tempArrayGame).size()>0)
                     {
                         System.out.println("Following game does not exist on game list\n"
-                                + gameServices.checkGameExistance(tempArrayGame)
-                                + "\nPlease add the game to game list first.");
+                                + gameService.checkGameExistance(tempArrayGame)
+                                + "\nPlease add the game to game list first."
+                                + "\nAdding new player failed");
                         break;
-                    }*/
+                    }
                     playerService.setNewPlayer(tempPlayerName, tempArrayGame);
+                    System.out.println(tempPlayerName + " has been added to player list");
                     break;
                 case "6":
                     System.out.println("provide name of a player you want to check known games");
                     tempPlayerName = scr.next();
-                    if (playerService.playerExistanceCheck(tempPlayerName)) {
+                    if (!playerService.playerExistanceCheck(tempPlayerName)) {
                         System.out.println("That player does not exist. Add player first");
                         break;
                     }
@@ -116,22 +117,28 @@ public class Application {
                         System.out.println("There are no games assigned to that player");
                         break;
                     }
-                    playerService.test(tempPlayerName);
+
                     System.out.println(playerService.getKnownGame(tempPlayerName));
                     break;
                 case "7":
                     System.out.println("Provide comma-separated player list");
-                    tempGameName = scr.next();
+                    tempGameName = scr.next().replaceAll("\\s+","");
                     tempArrayGame = new HashSet<String>(Arrays.asList(tempGameName.split(",")));
                     if (playerService.playerExistanceCheck(tempArrayGame).size() > 0) {
-                        System.out.println("Following player(s) does not exist");
+                        System.out.println("Following player(s) does not exist. Please add those players first.");
                         System.out.println(playerService.playerExistanceCheck(tempArrayGame));
                         break;
                     }
 
                     System.out.println("What is maximum amount of acceptable time in minutes");
-                    minutesForGame = scr.nextInt();
-                    selectionService.getRecommendedKnown(tempArrayGame, minutesForGame);
+                    minutesForGame = scr.next();
+                    try
+                    {selectionService.getRecommendedKnown(tempArrayGame, Integer.parseInt(minutesForGame)); }
+                    catch (NumberFormatException e)
+                    {
+                        System.out.println("Please provide acceptable time in minutes (number)");
+                    }
+
                     break;
                 case "8":
                     continueLoop = false;

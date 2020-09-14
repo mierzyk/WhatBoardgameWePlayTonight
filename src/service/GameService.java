@@ -3,6 +3,7 @@ package service;
 import model.Game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,24 +31,30 @@ public class GameService {
         gameData.add(new Game(name, minPlayers, maxPlayers, minutesPerPlayer));
     }
 
-    public ArrayList<String> getGames() {
-        ArrayList<String> tempGames = new ArrayList<>();
-        for (Game singleGame : gameData) {
-            tempGames.add(singleGame.getName());
+//    public ArrayList<String> getGames() {
+//        ArrayList<String> tempGames = new ArrayList<>();
+//        for (Game singleGame : gameData) {
+//            tempGames.add(singleGame.getName());
+//        }
+//        return tempGames;
+//    }
+
+    public Set<String> getAllGame()
+    {
+        Set<String> allGameList = new HashSet<>();
+        for(Game singleGame : gameData)
+        {
+            allGameList.add(singleGame.getName());
         }
-        return tempGames;
+        return allGameList;
     }
 
-    public String checkGameExistance(List<String> game) {
-        String nonUnique = "";
+    public List<String> checkGameExistance(Set<String> game) {
+        List<String> nonUnique = new ArrayList<>();
         for (String singleGameInput : game)
-            for (Game singleGame : gameData) {
-                //System.out.println(singleGame.getName());
-                if (singleGameInput.equals(singleGame.getName())) {
-                    nonUnique = singleGameInput;
-                    break;
+             if (!getAllGame().contains(singleGameInput)) {
+                    nonUnique.add(singleGameInput);
                 }
-            }
         return nonUnique;
     }
 

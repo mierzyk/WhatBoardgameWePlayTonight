@@ -15,25 +15,33 @@ public class PlayerService {
         this.playerData = playerData;
     }
 
+    public ArrayList<String> getAllPlayer() {
+        ArrayList<String> allPlayerList = new ArrayList<String>();
+        for (Player singlePlayer : playerData) {
+            allPlayerList.add(singlePlayer.getName());
+        }
+        return allPlayerList;
+    }
+
     public Set<String> getKnownGame(String name) {
         Set<String> tempPlayerList = new HashSet<>();
         for (Player singlePlayer : playerData) {
-            if (singlePlayer.getName().equals(name))
+            if (singlePlayer.getName().equals(name)) {
                 tempPlayerList = singlePlayer.getKnownGame();
-            return tempPlayerList;
+                return tempPlayerList;
+            }
         }
         return tempPlayerList;
     }
 
-    public List<String> getPlayer() {
-        ArrayList<String> tempPlayerList = new ArrayList<>();
-
-        for (Player singlePlayer : playerData) {
-            tempPlayerList.add(singlePlayer.getName());
-        }
-
-        return tempPlayerList;
-    }
+//    public List<String> getPlayer() {
+//        ArrayList<String> tempPlayerList = new ArrayList<>();
+//        for (Player singlePlayer : playerData) {
+//            tempPlayerList.add(singlePlayer.getName());
+//        }
+//
+//        return tempPlayerList;
+//    }
 
     public boolean playerUniqunessCheck(String name) {
         boolean duplicatedName = false;
@@ -52,22 +60,14 @@ public class PlayerService {
 
     public boolean playerExistanceCheck(String name) {
         boolean returner = false;
-        for (Player singlePlayer : playerData) {
-            if (singlePlayer.equals(name)) {
-                returner = true;
-                break;
-            }
+        if(getAllPlayer().contains(name))
+        {
+            returner = true;
         }
         return returner;
     }
 
-    public ArrayList<String> getAllPlayer() {
-        ArrayList<String> allPlayerList = new ArrayList<String>();
-        for (Player singlePlayer : playerData) {
-            allPlayerList.add(singlePlayer.getName());
-        }
-        return allPlayerList;
-    }
+
 
     public ArrayList<String> playerExistanceCheck(Set<String> setOfNames) {
         ArrayList<String> nonExistingNames = new ArrayList<>();
@@ -78,13 +78,4 @@ public class PlayerService {
         return nonExistingNames;
     }
 
-    public void test(String name) {
-        for (Player singlePlayer : playerData) {
-            if (singlePlayer.getName().equals(name)) {
-                System.out.println("wewnatrz");
-                System.out.println(singlePlayer.getKnownGame());
-            }
-        }
-
-    }
 }
