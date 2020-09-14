@@ -1,4 +1,5 @@
 package application;
+
 import dataset.GameData;
 import dataset.PlayerData;
 import model.Game;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import service.GameService;
 import service.PlayerService;
 import service.SelectionService;
-
 import java.util.List;
 import java.util.Set;
 
@@ -20,26 +20,29 @@ import java.util.Set;
 public class GameConfig {
 
     @Bean
-    public Set<Game> gameData()
-    {
+    public Set<Game> gameData() {
         return new GameData().getGameData();
     }
 
     @Bean
-    public List<Player> playerData()
-    {
+    public List<Player> playerData() {
         return new PlayerData().getPlayerData();
     }
 
     @Bean
-    public PlayerService playerServices() {return new PlayerService(playerData());}
+    public PlayerService playerService() {
+        return new PlayerService(playerData());
+    }
 
     @Bean
-    public GameService gameServices() {return new GameService(gameData());}
+    public GameService gameService() {
+        return new GameService(gameData());
+    }
 
     @Bean
-    public SelectionService selectionServices() {return new SelectionService(gameData(),playerData());}
-
+    public SelectionService selectionService() {
+        return new SelectionService(gameData(), playerData());
+    }
 
 
 }

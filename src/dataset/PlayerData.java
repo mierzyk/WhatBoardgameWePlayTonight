@@ -16,18 +16,16 @@ public class PlayerData {
 
 
         playerData = new ArrayList<Player>();
-        Set<String> tempSet = new HashSet<String>();
-        tempSet.add("Scythe");
-        tempSet.add("Agricola");
-        tempSet.add("Puerto Rico");
-        tempSet.add("Avalon");
-        tempSet.add("Captain Sonar");
-        tempSet.add("Cyklady");
-        tempSet.add("Siedem Cudow Swiata");
-        tempSet.add("Blood Rage");
 
-
-        playerData.add(new Player("Michal", tempSet));
+        playerData.add(new Player("Michal", new HashSet<>() {{
+            add("Scythe");
+            add("Agricola");
+            add("Cyklady");
+            add("Feudum");
+            add("Teotihuacan");
+            add("Avalon");
+            add("Tzolk'in");
+        }}));
 
         playerData.add(new Player("Asia", new HashSet<>() {{
             add("Scythe");

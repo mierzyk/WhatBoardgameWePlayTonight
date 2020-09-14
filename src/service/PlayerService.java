@@ -17,11 +17,10 @@ public class PlayerService {
 
     public Set<String> getKnownGame(String name) {
         Set<String> tempPlayerList = new HashSet<>();
-
         for (Player singlePlayer : playerData) {
             if (singlePlayer.getName().equals(name))
-                tempPlayerList = (singlePlayer.getKnownGame());
-            break;
+                tempPlayerList = singlePlayer.getKnownGame();
+            return tempPlayerList;
         }
         return tempPlayerList;
     }
@@ -53,15 +52,39 @@ public class PlayerService {
 
     public boolean playerExistanceCheck(String name) {
         boolean returner = false;
-
         for (Player singlePlayer : playerData) {
             if (singlePlayer.equals(name)) {
                 returner = true;
                 break;
             }
         }
-
         return returner;
+    }
+
+    public ArrayList<String> getAllPlayer() {
+        ArrayList<String> allPlayerList = new ArrayList<String>();
+        for (Player singlePlayer : playerData) {
+            allPlayerList.add(singlePlayer.getName());
+        }
+        return allPlayerList;
+    }
+
+    public ArrayList<String> playerExistanceCheck(Set<String> setOfNames) {
+        ArrayList<String> nonExistingNames = new ArrayList<>();
+        for (String singleName : setOfNames)
+            if (!getAllPlayer().contains(singleName)) {
+                nonExistingNames.add(singleName);
+            }
+        return nonExistingNames;
+    }
+
+    public void test(String name) {
+        for (Player singlePlayer : playerData) {
+            if (singlePlayer.getName().equals(name)) {
+                System.out.println("wewnatrz");
+                System.out.println(singlePlayer.getKnownGame());
+            }
+        }
 
     }
 }

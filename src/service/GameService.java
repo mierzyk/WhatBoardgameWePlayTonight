@@ -40,12 +40,10 @@ public class GameService {
 
     public String checkGameExistance(List<String> game) {
         String nonUnique = "";
-        for(String singleGameInput : game)
-            for(Game singleGame : gameData)
-            {
+        for (String singleGameInput : game)
+            for (Game singleGame : gameData) {
                 //System.out.println(singleGame.getName());
-                if(singleGameInput.equals(singleGame.getName()))
-                {
+                if (singleGameInput.equals(singleGame.getName())) {
                     nonUnique = singleGameInput;
                     break;
                 }

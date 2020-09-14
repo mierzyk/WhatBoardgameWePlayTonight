@@ -8,13 +8,13 @@ public class Game {
     private int minutesPerPlayer;
     //public GameExpansion gameExpansion;
 
-    public Game(String name, int minPlayers, int maxPlayers, int minutesPerPlayer)//, GameExpansion gameExpansion)
+    public Game(String name, int minPlayers, int maxPlayers, int minutesPerPlayer)
     {
         this.name = name;
         this.minPlayers = minPlayers;
         this.maxPlayers = maxPlayers;
         this.minutesPerPlayer = minutesPerPlayer;
-        //this.gameExpansion = gameExpansion;
+        //this.gameExpansion = gameExpansion;//todo develop game expansion mechanism
     }
 
     public String getName()

@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Set;
 
 
@@ -11,16 +12,13 @@ public class Player {
         this.name = name;
         this.knownGame = knownGame;
     }
-    //PlayerGameKnowledge knowledge;
-    //PlayerGamePreferences preferences;
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public Set<String> getKnownGame(){
+    public Set<String> getKnownGame() {
         return this.knownGame;
     }
-
 
 }
